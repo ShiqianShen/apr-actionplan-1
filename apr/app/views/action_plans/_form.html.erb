@@ -1,49 +1,161 @@
 <%= form_for(@action_plan) do |f| %>
-  <% if @action_plan.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@action_plan.errors.count, "error") %> prohibited this action_plan from being saved:</h2>
+    <% if @action_plan.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@action_plan.errors.count, "error") %> prohibited this action_plan from being saved:</h2>
 
-      <ul>
-      <% @action_plan.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @action_plan.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field col-md-12 field text-left" style="right: 1%">
+
+      <p><strong>Program Goal</strong></p>
+      <p>Date of most recent version of Unit's Mission/Vision Statement
+      <script>
+          $(function() {
+              $( "#datepicker1" ).datepicker({
+                  dateFormat: "yy-mm-dd"
+
+              });
+          });
+      </script>
+      <%#= f.label :date_of_site_visit %>
+      <input type="text" id="datepicker1" name="action_plan[date_of_site_visit]">
+      </p>
+
+      <p>Date of most recent Update to Unit's Program Goals
+        <script>
+            $(function() {
+                $( "#datepicker2" ).datepicker({
+                    dateFormat: "yy-mm-dd"
+                });
+            });
+        </script>
+        <%#= f.label :submission_or_update_date %>
+        <input type="text" id="datepicker2" name="action_plan[date_of_site_visit]">
+      </p>
+
+      <div class="field col-md-5 field text-left"  style="right: 1.5%">
+        <p>Action:
+        <input type="text">
+        </p>
+        <p>Assosiated Tasks:
+          <input type="text">
+        </p>
+        <p>Individual(s) Responsible:
+          <input type="text">
+        </p>
+        <P>Other Resources/Items:
+          <input type="text">
+        </p>
+      </div>
+
+      <div class="field col-md-6 field text-left"  style="right: 1%">
+        <p>Costs Amount (if appliable) and Sources of Funding:
+          <input type="text">
+        </p>
+        <p>Project Start Date:
+          <script>
+              $(function() {
+                  $( "#datepicker3" ).datepicker({
+                      dateFormat: "yy-mm-dd"
+                  });
+              });
+          </script>
+          <input type="text" id="datepicker3">
+        </p>
+        <p>Target Date for Completion:
+          <script>
+              $(function() {
+                  $( "#datepicker4" ).datepicker({
+                      dateFormat: "yy-mm-dd"
+                  });
+              });
+          </script>
+          <input type="text" id="datepicker4">
+        </p>
+        <P>Current Status of (Populate w/Submission Date):
+          <input type="text">
+        </p>
+      </div>
+
+      <div class="field col-md-7 field text-left"  style="right: 1.5%">
+        <p>Criterion 1 Action Items Narrative/Additional Comments:</p>
+        <div class="field col-md-7 field text-left"  style="right: 7%">
+          <textarea rows="6" cols ="50" name="" id=""></textarea>
+        </div>
+      </div>
+      <div class="field col-md-4 field text-left"  style="right: 1.5%">
+        <br>
+        <br>
+        <br>
+        <button type="submit">Upload Files</button>
+      </div>
     </div>
-  <% end %>
+    <div class="actions">
+      <input type="submit" name="commit" value="submit">
+    </div>
 
-  <div class="field">
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div>
     <%= f.label :unit %><br>
-    <%# f.text_field :unit %>
+<%# f.text_field :unit %>
     <%= f.collection_select :unit_id, Unit.all, :id, :unit, prompt: true %>
-  </div>
-  <div class="field">
-    <%= f.label :date_of_site_visit %><br>
-    <%= f.date_select :date_of_site_visit %>
-  </div>
-  <div class="field">
-    <%= f.label :submission_or_update %><br />
-    <%= f.label :submission_or_update, "Submission", :value => "submission"  %>
-    <%= f.radio_button :submission_or_update, "Submission", {:checked => true} %>
-    <%= f.label :submission_or_update, "Update", :value => "update" %>
-    <%= f.radio_button :submission_or_update, "Update" %>
-  </div>
-  <div class="field">
-    <%= f.label :Date %><br>
-    <%= f.date_select :submission_or_update_date %>
-  </div>
-  <div class="field">
-    <%= f.label :submitter_first_name %><br>
-    <%= f.text_field :submitter_first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :submitter_last_name %><br>
-    <%= f.text_field :submitter_last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :submitter_title %><br>
-    <%= f.text_field :submitter_title %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    </div>
+    <div class="field text-center">
+      <%= f.label :submission_or_update %><br />
+      <%= f.label :submission_or_update, "Submission", :value => "submission"  %>
+      <%= f.radio_button :submission_or_update, "Submission", {:checked => true} %>
+      <%= f.label :submission_or_update, "Update", :value => "update" %>
+      <%= f.radio_button :submission_or_update, "Update" %>
+    </div>
+    <div class="field text-center">
+      <%= f.label :submission_or_update_date %><br>
+      <script>
+          $(function() {
+              $( "#datepicker2" ).datepicker({
+                  dateFormat: "yy-mm-dd"
+              });
+          });
+      </script>
+      <p><input type="text" id="datepicker2" name="action_plan[submission_or_update_date]" value=""></p>
+    </div>
+    <div class="field col-md-offset-1 col-md-10 text-center">
+      <div class="col-md-3">
+        <%= f.label :first_name %><br>
+        <%= f.text_field :submitter_first_name %>
+      </div>
+      <div class="col-md-3">
+        <%= f.label :last_name %><br>
+        <%= f.text_field :submitter_last_name %>
+      </div>
+      <div class="col-md-3">
+        <%= f.label :title %><br>
+        <%= f.text_field :submitter_title %>
+      </div>
+    </div>
+
+
+
+
+
+
 <% end %>
+
+
