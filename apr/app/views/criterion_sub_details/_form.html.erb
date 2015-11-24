@@ -11,6 +11,99 @@
     </div>
   <% end %>
 
+    <div class="field col-md-12 field text-left" style="right: 1%">
+
+      <p><strong>Program Goal</strong></p>
+      <p>Date of most recent version of Unit's Mission/Vision Statement
+        <script>
+            $(function() {
+                $( "#datepicker_latest_version" ).datepicker({
+                    dateFormat: "yy-mm-dd"
+
+                });
+            });
+        </script>
+        <%#= f.label :date_of_site_visit %>
+        <input type="text" id="datepicker_latest_version" name="">???
+      </p>
+
+      <p>Date of most recent Update to Unit's Program Goals
+        <script>
+            $(function() {
+                $( "#datepicker_recent_update" ).datepicker({
+                    dateFormat: "yy-mm-dd"
+                });
+            });
+        </script>
+        <%#= f.label :submission_or_update_date %>
+        <input type="text" id="datepicker_recent_update" name="">???
+      </p>
+
+      <div class="field col-md-5 field text-left"  style="right: 1.5%">
+        <p>Action:
+          <input type="text" name="criterion_sub_detail[action_item]" value="<%= @criterion_sub_detail.action_item %>">
+        </p>
+        <p>Assosiated Tasks:
+          <input type="text" name="criterion_sub_detail[associated_tasks]" value="<%= @criterion_sub_detail.associated_tasks %>">
+        </p>
+        <p>Individual(s) Responsible:
+          <input type="text" name="criterion_sub_detail[individuals_resp]" value="<%= @criterion_sub_detail.individuals_resp %>">
+        </p>
+        <P>Other Resources/Items:
+          <input type="text" name="criterion_sub_detail[other_res_items]" value="<%= @criterion_sub_detail.other_res_items %>">
+        </p>
+      </div>
+
+      <div class="field col-md-6 field text-left"  style="right: 1%">
+        <p>Costs Amount (if appliable) and Sources of Funding:
+          <input type="text" name="criterion_sub_detail[source_of_funding]" value="<%= @criterion_sub_detail.source_of_funding %>">
+        </p>
+        <p>Project Start Date:
+          <script>
+              $(function() {
+                  $( "#start_datepicker" ).datepicker({
+                      dateFormat: "yy-mm-dd"
+                  });
+              });
+          </script>
+          <input type="text" id="start_datepicker" name="criterion_sub_detail[proj_start_date]" value="<%= @criterion_sub_detail.proj_start_date %>">
+        </p>
+        <p>Target Date for Completion:
+          <script>
+              $(function() {
+                  $( "#target_datepicker" ).datepicker({
+                      dateFormat: "yy-mm-dd"
+                  });
+              });
+          </script>
+          <input type="text" id="target_datepicker"  name="criterion_sub_detail[target_comp_date]" value="<%= @criterion_sub_detail.target_comp_date %>">
+        </p>
+        <P>Current Status of (Populate w/Submission Date):
+          <input type="text" name="criterion_sub_detail[current_status]" value="<%= @criterion_sub_detail.current_status %>" >
+        </p>
+      </div>
+
+      <div class="field col-md-7 field text-left"  style="right: 1.5%">
+        <p>Criterion 1 Action Items Narrative/Additional Comments:</p>
+        <div class="field col-md-7 field text-left"  style="right: 7%">
+          <textarea rows="6" cols ="50" name="" id=""></textarea>
+        </div>
+      </div>
+      <div class="field col-md-4 field text-left"  style="right: 1.5%">
+        <br>
+        <br>
+        <br>
+        <button type="submit">Upload Files</button>
+      </div>
+    </div>
+    <div class="field">
+      <%= f.label :cost_amt %><br>????
+      <%= f.text_field :cost_amt %>
+    </div>
+    <div class="actions">
+      <input type="submit" name="commit" value="submit">
+    </div>
+<!---
   <div class="field">
     <%= f.label :criterion_detail_id %><br>
     <%= f.text_field :criterion_detail_id %>
@@ -31,10 +124,7 @@
     <%= f.label :other_res_items %><br>
     <%= f.text_field :other_res_items %>
   </div>
-  <div class="field">
-    <%= f.label :cost_amt %><br>
-    <%= f.text_field :cost_amt %>
-  </div>
+
   <div class="field">
     <%= f.label :source_of_funding %><br>
     <%= f.text_field :source_of_funding %>
@@ -54,4 +144,5 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+  --->
 <% end %>
