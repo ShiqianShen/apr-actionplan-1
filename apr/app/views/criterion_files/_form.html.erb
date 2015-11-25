@@ -1,0 +1,29 @@
+<%= form_for(@criterion_file) do |f| %>
+  <% if @criterion_file.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@criterion_file.errors.count, "error") %> prohibited this criterion_file from being saved:</h2>
+
+      <ul>
+      <% @criterion_file.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :criterion_detail_id %><br>
+    <%= f.text_field :criterion_detail_id %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :attachment %><br>
+    <%= f.text_field :attachment %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

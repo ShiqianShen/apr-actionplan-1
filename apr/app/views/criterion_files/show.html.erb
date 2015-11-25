@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Criterion detail:</strong>
+  <%= @criterion_file.criterion_detail %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @criterion_file.name %>
+</p>
+
+<p>
+  <strong>Attachment:</strong>
+  <%= @criterion_file.attachment %>
+</p>
+
+<%= link_to 'Edit', edit_criterion_file_path(@criterion_file) %> |
+<%= link_to 'Back', criterion_files_path %>

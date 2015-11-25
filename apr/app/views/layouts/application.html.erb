@@ -2,12 +2,13 @@
 <html>
 <head>
   <title>Apr</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= stylesheet_link_tag 'home', media: 'all' %>
+  <%= stylesheet_link_tag 'home', media: 'all' %> <!-- home.scss -->
   <%= csrf_meta_tags %>
 </head>
 <body>
+<<<<<<< HEAD
 <div id="logged-in">
   Signed in as <SPAN id="top-username"> <%= session[:cas_user] %></SPAN>. Not you?
   <%= link_to("Sign Out", logout_path) %>
@@ -15,35 +16,222 @@
 <div id="wrapper">
   <div id="head">
     <div id="banner">
-      <img src="/assets/banner.jpg" />
-    </div>
-    <div id="navigation">
-      <% if session[:cas_user].to_s == User.find_by_username(session[:cas_user].to_s) && User.find_by_username(session[:cas_user].to_s).role.to_s == "Admin" then %>
-        <ul>
-          <li><%= link_to("Home", home_index_path) %></li>
-          <li><%= link_to("APR Reports", action_plan_path) %></li>
-          <li><%= link_to("Criteria", criterions_path) %></li>
-          <li><a href="/criterions/">Criteria</a></li>
-          <li><a href="/admin/users/">Users</a></li>
-          <li><a href="/user_roles/">Roles</a></li>
-          <li><a href="/units/">Units</a></li>
-          <li><a href="/colleges/">Colleges</a></li>
-          <li><a href="/milestones/">Milestones</a></li>
-        </ul>
-      <% else %>
-        <ul>
-          <li><%= link_to("Home", home_index_path) %></li>
-          <li><%= link_to("APR Reports", action_plans_path) %></li>
-          <li><%= link_to("Criteria Details", criterion_details_path) %></li>
-        </ul>
-      <% end %>
-      <br class="clear"/>
+      <img src="/assets/banner.jpg"/>
+=======
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin: 0px;">
+
+  <div class="container-fluid">
+    <!-- Navigation bar Header -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-bar-apr-collapse">
+        <span class="sr-only"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">University of New Mexico</a>
+>>>>>>> a677389635cfc427085a36ad0ade7082cc6b0605
     </div>
 
-    <div id="content">
-      <%= yield %>
+    <!--<div class="navbar-header navbar-right">-->
+    <div class="collapse navbar-collapse navbar-right" id="nav-bar-apr-collapse">
+      <% if session[:cas_user].to_s == User.find_by_username(session[:cas_user].to_s) && User.find_by_username(session[:cas_user].to_s).role.to_s == "Admin" then %>
+<<<<<<< HEAD
+          <ul>
+            <li><%= link_to("Home", home_index_path) %></li>
+            <li><%= link_to("APR Reports", action_plan_path) %></li>
+            <li><%= link_to("Criteria", criterions_path) %></li>
+            <li><a href="/criterions/">Criteria</a></li>
+            <li><a href="/admin/users/">Users</a></li>
+            <li><a href="/user_roles/">Roles</a></li>
+            <li><a href="/units/">Units</a></li>
+            <li><a href="/colleges/">Colleges</a></li>
+            <li><a href="/milestones/">Milestones</a></li>
+          </ul>
+      <% else %>
+          <ul>
+            <li><%= link_to("Home", home_index_path) %></li>
+
+            <%# --------- Action Plan -------------------%>
+            <% if ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s).id).blank? then %>
+                <li><%= link_to("APR Reports", new_action_plan_path) %></li>
+            <% else %>
+                <li><%= link_to("APR Reports", edit_action_plan_path(:id => ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s).id).id)) %></li>
+            <% end %>
+
+            <%# --------- Show Criterions only if Action Plan is created -------------------%>
+            <% if !ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s).id).blank? %>
+                <%# --------- Criterion 1 -------------------%>
+                <% if CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s)).id, Criterion.find_by_criterion_number(1).id).blank? then %>
+                    <li><%= link_to("Criterion 1", new_criterion_detail_path(:cr => 1)) %></li>
+                <% else %>
+                    <li><%= link_to("Criterion 1", edit_criterion_detail_path(:id => CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s)).id, Criterion.find_by_criterion_number(1).id).id,
+                                                                              :cr => 1)) %></li>
+                <% end %>
+
+                <%# --------- Criterion 2 -------------------%>
+                <% if CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s)).id, Criterion.find_by_criterion_number(2).id).blank? then %>
+                    <li><%= link_to("Criterion 2", new_criterion_detail_path(:cr => 2)) %></li>
+                <% else %>
+                    <li><%= link_to("Criterion 2", edit_criterion_detail_path(:id => CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s)).id, Criterion.find_by_criterion_number(2).id).id,
+                                                                              :cr => 2)) %></li>
+                <% end %>
+
+                <%# --------- Criterion 3 -------------------%>
+                <% if CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s)).id, Criterion.find_by_criterion_number(3).id).blank? then %>
+                    <li><%= link_to("Criterion 3", new_criterion_detail_path(:cr => 3)) %></li>
+                <% else %>
+                    <li><%= link_to("Criterion 3", edit_criterion_detail_path(:id => CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s)).id, Criterion.find_by_criterion_number(3).id).id,
+                                                                              :cr => 3)) %></li>
+                <% end %>
+
+                <%# --------- Criterion 4 -------------------%>
+                <% if CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s)).id, Criterion.find_by_criterion_number(4).id).blank? then %>
+                    <li><%= link_to("Criterion 4", new_criterion_detail_path(:cr => 4)) %></li>
+                <% else %>
+                    <li><%= link_to("Criterion 4", edit_criterion_detail_path(:id => CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s)).id, Criterion.find_by_criterion_number(4).id).id,
+                                                                              :cr => 4)) %></li>
+                <% end %>
+
+                <%# --------- Criterion 5 -------------------%>
+                <% if CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s)).id, Criterion.find_by_criterion_number(5).id).blank? then %>
+                    <li><%= link_to("Criterion 5", new_criterion_detail_path(:cr => 5)) %></li>
+                <% else %>
+                    <li><%= link_to("Criterion 5", edit_criterion_detail_path(:id => CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s)).id, Criterion.find_by_criterion_number(5).id).id,
+                                                                              :cr => 5)) %></li>
+                <% end %>
+
+                <%# --------- Criterion 6 -------------------%>
+                <% if CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s)).id, Criterion.find_by_criterion_number(6).id).blank? then %>
+                    <li><%= link_to("Criterion 6", new_criterion_detail_path(:cr => 6)) %></li>
+                <% else %>
+                    <li><%= link_to("Criterion 6", edit_criterion_detail_path(:id => CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s)).id, Criterion.find_by_criterion_number(6).id).id,
+                                                                              :cr => 6)) %></li>
+                <% end %>
+
+                <%# --------- Criterion 7 -------------------%>
+                <% if CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s)).id, Criterion.find_by_criterion_number(7).id).blank? then %>
+                    <li><%= link_to("Criterion 7", new_criterion_detail_path(:cr => 7)) %></li>
+                <% else %>
+                    <li><%= link_to("Criterion 7", edit_criterion_detail_path(:id => CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s)).id, Criterion.find_by_criterion_number(7).id).id,
+                                                                              :cr => 7)) %></li>
+                <% end %>
+
+                <%# --------- Criterion 8 -------------------%>
+                <% if CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s)).id, Criterion.find_by_criterion_number(8).id).blank? then %>
+                    <li><%= link_to("Criterion 8", new_criterion_detail_path(:cr => 8)) %></li>
+                <% else %>
+                    <li><%= link_to("Criterion 8", edit_criterion_detail_path(:id => CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s)).id, Criterion.find_by_criterion_number(8).id).id,
+                                                                              :cr => 8)) %></li>
+                <% end %>
+
+                <%# --------- Criterion 9 -------------------%>
+                <% if CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s)).id, Criterion.find_by_criterion_number(9).id).blank? then %>
+                    <li><%= link_to("Criterion 9", new_criterion_detail_path(:cr => 9)) %></li>
+                <% else %>
+                    <li><%= link_to("Criterion 9", edit_criterion_detail_path(:id => CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s)).id, Criterion.find_by_criterion_number(9).id).id,
+                                                                              :cr => 9)) %></li>
+                <% end %>
+            <% end %>
+=======
+          <ul class="nav navbar-nav">
+            <li><a href="#">Home</a></li>
+          </ul>
+      <% else %>
+          <ul class="nav navbar-nav">
+            <li><%= link_to("Home", home_index_path) %></li>
+            <li><%= link_to("APR Reports", action_plans_path) %></li>
+            <li><a href="/criterions/">Criteria</a></li>
+            <li><a href="#">Signed in as<%= session[:cas_user] %>. Not you?</a></li>
+            <li><a href="#">Sign Out</a></li>
+>>>>>>> a677389635cfc427085a36ad0ade7082cc6b0605
+          </ul>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+<br><br>
+<!-- Page Header -->
+<div class="page-header no-margin no-padding">
+  <div class="container">
+    <img src="/assets/banner.jpg" class="img-responsive full-width">
+  </div>
+</div>
+
+<div id="content">
+  <%= yield %>
+</div>
+<br><br>
+
+<div id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <h4>Pysical Address</h4>
+        Scholes Hall
+        <br>
+        Room 240
+        <br>
+        Phone: (505) 277-4130
+        <br>
+        Fax: (505) 277-8275
+        <br>
+        Email:
+        <a href="mailto:apr@unm.edu">apr@unm.edu</a>
+      </div>
+      <div class="col-sm-4">
+        <h4>Mailing Address</h4>
+        Academic Program Review
+        <br>
+        MSC05 3400
+        <br>
+        1 University of New Mexico
+        <br>
+        Albuquerque, NM 87131-0001
+      </div>
+      <div class="col-sm-4">
+        <p>
+          <a href="http://unm.edu"></a>
+          <img src="https://webcore.unm.edu/v2/images/unm-transparent-white.png" alt="The University of New Mexico" >
+        </p>
+        <small>
+          alt="The University of New Mexico"
+          <br>
+          Albuquerque, NM 87131, (505) 277-0111
+          <br>
+          New Mexico's Flagship University
+        </small>
+      </div>
     </div>
   </div>
 </div>
 </body>
 </html>
+
+
+<!--
+ <div id="navbar" class="navbar-collapse collapse">
+          <#% if session[:cas_user].to_s == User.find_by_username(session[:cas_user].to_s) && User.find_by_username(session[:cas_user].to_s).role.to_s == "Admin" then %>
+              <ul class="nav navbar-nav">
+                <li><a href="#">Home</a></li>
+              </ul>
+          <#% else %>
+              <ul class="nav navbar-nav">
+                <li><#%= link_to("Home", home_index_path) %></li>
+                <li><#%= link_to("APR Reports", action_plans_path) %></li>
+                <li><a href="/criterions/">Criteria</a></li>
+                <li><a href="#">Signed in as<#%= session[:cas_user] %>. Not you?</a></li>
+                <li><a href="#">Sign Out</a></li>
+              </ul>
+          <#% end %>
+
+##Page Header
+<div class="page-header no-margin no-padding">
+  <div class="container">
+    <img src="/assets/banner.jpg" class="img-responsive full-width">
+  </div>
+</div>
+
+-->

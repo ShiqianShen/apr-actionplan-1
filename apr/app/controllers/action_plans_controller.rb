@@ -28,7 +28,8 @@ class ActionPlansController < ApplicationController
 
     respond_to do |format|
       if @action_plan.save
-        format.html { redirect_to @action_plan, notice: 'Action plan was successfully created.' }
+        # format.html { redirect_to @action_plan, notice: 'Action plan was successfully created.' }
+        format.html { redirect_to edit_action_plan_path(:id => @action_plan.id), notice: 'Action plan was successfully created.' }
         format.json { render :show, status: :created, location: @action_plan }
       else
         format.html { render :new }
@@ -42,7 +43,8 @@ class ActionPlansController < ApplicationController
   def update
     respond_to do |format|
       if @action_plan.update(action_plan_params)
-        format.html { redirect_to @action_plan, notice: 'Action plan was successfully updated.' }
+        # format.html { redirect_to @action_plan, notice: 'Action plan was successfully updated.' }
+        format.html { redirect_to edit_action_plan_path(:id => @action_plan.id), notice: 'Action plan was successfully updated.' }
         format.json { render :show, status: :ok, location: @action_plan }
       else
         format.html { render :edit }
@@ -69,6 +71,6 @@ class ActionPlansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def action_plan_params
-      params.require(:action_plan).permit(:unit_id, :date_of_site_visit, :submission_or_update, :submission_or_update_date, :submitter_first_name, :submitter_last_name, :submitter_title)
+      params.require(:action_plan).permit(:unit_id, :user_id, :date_of_site_visit, :submission_or_update, :submission_or_update_date, :submitter_first_name, :submitter_last_name, :submitter_title)
     end
 end

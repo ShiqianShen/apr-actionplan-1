@@ -43,6 +43,7 @@
     <%= f.label :submitter_title %><br>
     <%= f.text_field :submitter_title %>
   </div>
+  <%= f.hidden_field :user_id, :value => User.find_by_username(session[:cas_user].to_s).id %>
   <div class="actions">
     <%= f.submit %>
   </div>

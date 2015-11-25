@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :criterion_files
   resources :criterion_sub_details
   resources :criterion_details
   resources :criterions

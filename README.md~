@@ -33,6 +33,8 @@ rake db:seed
 Admin User: vamshins/vamshins
 Normal User: aseciwa/aseciwa
 
+Check db/seeds for more information.
+
 ## Get status of migration
 ```
 rake db:migrate:status
@@ -57,22 +59,22 @@ rails s
 
 # Milestones of the Project
 - [x] Project Management Plan (deliverables: documents), Due date: Nov' 10
-- [ ] Milestone 0: Initial Requirements Document and Gantt Chart (deliverables: documents), Due date: Nov' 12
-- [ ] Milestone 1: Initial prototype (Prototype 1) (deliverables: updated documents, artifacts and code), Due date: Nov' 17
+- [x] Milestone 0: Initial Requirements Document and Gantt Chart (deliverables: documents), Due date: Nov' 12
+- [x] Milestone 1: Initial prototype (Prototype 1) (deliverables: updated documents, artifacts and code), Due date: Nov' 17
 - [ ] Milestone 2: Prototype 2 (deliverables: updated documents, artifacts and code), Due date: Nov' 24
 - [ ] Milestone 3: Prototype 3 (deliverables: updated documents, artifacts and code), Due date: Dec' 01
 - [ ] Final Presentation (deliverables: presentation, updated documents, artifacts and code), Due date: Dec' 08
 
 # Status of the tasks
-- [ ] Database Model
-	- [ ] Database design
-	- [ ] Create tables, indexes, constraints in migrations under db/migrate/ folder.
-	- [ ] Configure resources in routes.rb
-- [ ] Create Models
-	- [ ] Configure relationships (has_many, belongs_to, etc)
-	- [ ] Configure validations
-- [ ] Create Controllers
-- [ ] Create Views
+- [x] Database Model
+	- [x] Database design
+	- [x] Create tables, indexes, constraints in migrations under db/migrate/ folder.
+	- [x] Configure resources in routes.rb
+- [x] Create Models
+	- [x] Configure relationships (has_many, belongs_to, etc)
+	- [] Configure validations
+- [x] Create Controllers
+- [] Create Views
 	- [ ] Create Action Plan
 	- [ ] Create Criterion 1
 	- [ ] Create Criterion 2
@@ -85,12 +87,12 @@ rails s
 	- [ ] Create Criterion 9
 - [ ] Setup Mandrill account
 	- [ ] Setup Email functionality in app
-- [ ] Authentication
-	- [ ] Setup CAS functionality in app
+- [x] Authentication
+	- [x] Setup CAS functionality in app
 	
 
 # Contributors
-- [Alan Seciwa](https://www.github.com)
+- [Alan Seciwa](https://www.github.com/aseciwa)
 - [Vamshi Krishna](https://github.com/vamshins)
 - [Magesh Rajasekaran](https://www.github.com)
 - [Sriranjitha Sankar](https://www.github.com)

@@ -1,45 +1,61 @@
 <%= form_for(@criterion_detail) do |f| %>
-  <% if @criterion_detail.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@criterion_detail.errors.count, "error") %> prohibited this criterion_detail from being saved:</h2>
+    <% if @criterion_detail.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@criterion_detail.errors.count, "error") %> prohibited this criterion_detail from being
+            saved:</h2>
 
-      <ul>
-      <% @criterion_detail.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @criterion_detail.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <%= f.hidden_field :action_plan_id, :value => ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s).id).id %>
+
+    <%= f.hidden_field :criterion_id, :value => @criterion.id %>
+
+    <% if @criterion.criterion_number == 1 || @criterion.criterion_number == 3 || @criterion.criterion_number == 9 %>
+        <div class="field">
+          <%= f.label :cd_date1, @criterion.field1 %><br>
+          <%= f.date_select :cd_date1 %>
+        </div>
+    <% end %>
+
+    <% if @criterion.criterion_number == 1 || @criterion.criterion_number == 3 %>
+        <div class="field">
+          <%= f.label :cd_date2, @criterion.field2 %><br>
+          <%= f.date_select :cd_date2 %>
+        </div>
+    <% end %>
+
+    <% if @criterion.criterion_number == 2 || @criterion.criterion_number == 4 || @criterion.criterion_number == 5 || @criterion.criterion_number == 6 || @criterion.criterion_number == 7 || @criterion.criterion_number == 8 %>
+        <div class="field">
+          <%= f.label :cd_field1, @criterion.field1 %><br>
+          <%= f.text_area :cd_field1 %>
+        </div>
+    <% end %>
+
+    <% if @criterion.criterion_number == 5 %>
+        <div class="field">
+          <%= f.label :cd_field2, @criterion.field2 %><br>
+          <%= f.text_area :cd_field2 %>
+        </div>
+    <% end %>
+
+    <%# ------------------- Criterion Sub Details -------------------- %>
+    <% if !CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s)).id, Criterion.find_by_criterion_number(@criterion.criterion_number).id).blank? %>
+        <% @criterion_sub_detail = CriterionSubDetail.new %>
+        <%= render template: 'criterion_sub_details/new' %>
+        <%# render :partial => @criterion_detail.criterion_sub_details.reverse %>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :comments %><br>
+      <%= f.text_field :comments %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :action_plan_id %><br>
-    <%= f.text_field :action_plan_id %>
-  </div>
-  <div class="field">
-    <%= f.label :criterion_id %><br>
-    <%= f.text_field :criterion_id %>
-  </div>
-  <div class="field">
-    <%= f.label :cd_date1 %><br>
-    <%= f.date_select :cd_date1 %>
-  </div>
-  <div class="field">
-    <%= f.label :cd_date2 %><br>
-    <%= f.date_select :cd_date2 %>
-  </div>
-  <div class="field">
-    <%= f.label :cd_field1 %><br>
-    <%= f.text_field :cd_field1 %>
-  </div>
-  <div class="field">
-    <%= f.label :cd_field2 %><br>
-    <%= f.text_field :cd_field2 %>
-  </div>
-  <div class="field">
-    <%= f.label :comments %><br>
-    <%= f.text_field :comments %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

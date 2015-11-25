@@ -10,15 +10,20 @@ class CriterionDetailsController < ApplicationController
   # GET /criterion_details/1
   # GET /criterion_details/1.json
   def show
+    @criterion_sub_details = CriterionSubDetail.where(["criterion_detail_id = ?", @criterion_detail.id])
   end
 
   # GET /criterion_details/new
   def new
+    criterion_number = params[:cr]
+    @criterion = Criterion.find_by_criterion_number(criterion_number)
     @criterion_detail = CriterionDetail.new
   end
 
   # GET /criterion_details/1/edit
   def edit
+    criterion_number = params[:cr]
+    @criterion = Criterion.find_by_criterion_number(criterion_number)
   end
 
   # POST /criterion_details
@@ -28,7 +33,8 @@ class CriterionDetailsController < ApplicationController
 
     respond_to do |format|
       if @criterion_detail.save
-        format.html { redirect_to @criterion_detail, notice: 'Criterion detail was successfully created.' }
+        # format.html { redirect_to @criterion_detail, notice: 'Criterion detail was successfully created.' }
+        format.html { redirect_to edit_criterion_detail_path(:id => @criterion_detail.id, :cr => Criterion.find(@criterion_detail.criterion_id).criterion_number), notice: 'Criterion was successfully created.' }
         format.json { render :show, status: :created, location: @criterion_detail }
       else
         format.html { render :new }
@@ -42,7 +48,8 @@ class CriterionDetailsController < ApplicationController
   def update
     respond_to do |format|
       if @criterion_detail.update(criterion_detail_params)
-        format.html { redirect_to @criterion_detail, notice: 'Criterion detail was successfully updated.' }
+        # format.html { redirect_to @criterion_detail, notice: 'Criterion detail was successfully updated.' }
+        format.html { redirect_to edit_criterion_detail_path(:id => @criterion_detail.id, :cr => Criterion.find(@criterion_detail.criterion_id).criterion_number), notice: 'Criterion was successfully updated.' }
         format.json { render :show, status: :ok, location: @criterion_detail }
       else
         format.html { render :edit }

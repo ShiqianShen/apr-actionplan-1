@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  criterion_detail_id: 
+  name: MyString
+  attachment: MyString
+
+two:
+  criterion_detail_id: 
+  name: MyString
+  attachment: MyString

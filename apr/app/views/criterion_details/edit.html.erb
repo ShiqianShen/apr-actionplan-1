@@ -1,6 +1,8 @@
-<h1>Editing Criterion Detail</h1>
+<h1><%= @criterion.criterion_number %> - <%= @criterion.description %></h1>
+
+<p id="notice"><%= notice %></p>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @criterion_detail %> |
-<%= link_to 'Back', criterion_details_path %>
+<%# link_to 'Show', @criterion_detail %>
+<%# link_to 'Back', criterion_details_path %>
