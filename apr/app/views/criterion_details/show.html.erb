@@ -1,8 +1,8 @@
 <h1><%= @criterion.criterion_number %> - <%= @criterion.description %></h1>
 
 <% if @criterion_detail.present? then %>
-<br>
-<!--<p>
+    <br>
+    <!--<p>
   <strong>Action plan:</strong>
   <%= @criterion_detail.action_plan %>
 </p>
@@ -12,54 +12,54 @@
   <%= @criterion_detail.criterion %>
 </p>-->
 
-<p>
-  <% if @criterion.criterion_number == 1 || @criterion.criterion_number == 3 || @criterion.criterion_number == 9 %>
-      <strong><%= @criterion.field1 %></strong>
-      <%= @criterion_detail.cd_date1 %>
-  <% end %>
-</p>
+    <p>
+      <% if @criterion.criterion_number == 1 || @criterion.criterion_number == 3 || @criterion.criterion_number == 9 %>
+          <strong><%= @criterion.field1 %></strong>
+          <%= @criterion_detail.cd_date1 %>
+      <% end %>
+    </p>
 
-<p>
-  <% if @criterion.criterion_number == 1 || @criterion.criterion_number == 3 %>
-      <strong><%= @criterion.field2 %></strong>
-      <%= @criterion_detail.cd_date2 %>
-  <% end %>
-</p>
+    <p>
+      <% if @criterion.criterion_number == 1 || @criterion.criterion_number == 3 %>
+          <strong><%= @criterion.field2 %></strong>
+          <%= @criterion_detail.cd_date2 %>
+      <% end %>
+    </p>
 
-<p>
-  <% if @criterion.criterion_number == 2 || @criterion.criterion_number == 4 || @criterion.criterion_number == 5 || @criterion.criterion_number == 6 || @criterion.criterion_number == 7 || @criterion.criterion_number == 8 %>
-      <strong><%= @criterion.field1 %></strong>
-      <%= @criterion_detail.cd_field1 %>
-  <% end %>
-</p>
+    <p>
+      <% if @criterion.criterion_number == 2 || @criterion.criterion_number == 4 || @criterion.criterion_number == 5 || @criterion.criterion_number == 6 || @criterion.criterion_number == 7 || @criterion.criterion_number == 8 %>
+          <strong><%= @criterion.field1 %></strong>
+          <%= @criterion_detail.cd_field1 %>
+      <% end %>
+    </p>
 
-<p>
-  <% if @criterion.criterion_number == 5 %>
-      <strong><%= @criterion.field2 %></strong>
-      <%= @criterion_detail.cd_field2 %>
-  <% end %>
-</p>
+    <p>
+      <% if @criterion.criterion_number == 5 %>
+          <strong><%= @criterion.field2 %></strong>
+          <%= @criterion_detail.cd_field2 %>
+      <% end %>
+    </p>
 
-<p>
-  <strong>Comments:</strong>
-  <%= @criterion_detail.comments %>
-</p>
+    <p>
+      <strong>Comments:</strong>
+      <%= @criterion_detail.comments %>
+    </p>
 
-<% user = User.find_by_username(session[:cas_user].to_s) %>
-<% if user.role.eql?("Admin") %>
-    <% crit_detail = CriterionDetail.find_by_action_plan_id_and_criterion_id(@action_plan.id, Criterion.find_by_criterion_number(@criterion.criterion_number).id) %>
-<% else %>
-    <% crit_detail = CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(user.id).id, Criterion.find_by_criterion_number(@criterion.criterion_number).id) %>
-<% end %>
+    <% user = User.find_by_username(session[:cas_user].to_s) %>
+    <% if user.role.eql?("Admin") %>
+        <% crit_detail = CriterionDetail.find_by_action_plan_id_and_criterion_id(@action_plan.id, Criterion.find_by_criterion_number(@criterion.criterion_number).id) %>
+    <% else %>
+        <% crit_detail = CriterionDetail.find_by_action_plan_id_and_criterion_id(ActionPlan.find_by_user_id(user.id).id, Criterion.find_by_criterion_number(@criterion.criterion_number).id) %>
+    <% end %>
 <%# ------------------- Criterion Sub Details and Files-------------------- %>
-<% if !crit_detail.blank? %>
+    <% if !crit_detail.blank? %>
 
-    <%# @criterion_sub_details = CriterionSubDetail.all %>
-    <% @criterion_sub_details = CriterionSubDetail.where(["criterion_detail_id = ?", @criterion_detail.id]) %>
-    <%= render template: 'criterion_sub_details/index' %>
+        <%# @criterion_sub_details = CriterionSubDetail.all %>
+        <% @criterion_sub_details = CriterionSubDetail.where(["criterion_detail_id = ?", @criterion_detail.id]) %>
+        <%= render template: 'criterion_sub_details/index' %>
 
-    <% @criterion_files = CriterionFile.where(["criterion_detail_id = ?", @criterion_detail.id]) %>
-    <%= render template: 'criterion_files/index', :criterion_detail => @criterion_detail %>
+        <% @criterion_files = CriterionFile.where(["criterion_detail_id = ?", @criterion_detail.id]) %>
+        <%= render template: 'criterion_files/index', :criterion_detail => @criterion_detail %>
     <% end %>
 <% else %>
     No details entered for this Criterion.

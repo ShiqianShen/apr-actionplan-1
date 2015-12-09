@@ -5,7 +5,10 @@ class ActionPlansController < ApplicationController
   end
 
   def submit_confirmed
-    @action_plan_t = ActionPlan.find_by_user_id(User.find_by_username(session[:cas_user].to_s))
+    @user = User.find_by_username(session[:cas_user].to_s)
+    @action_plan_t = ActionPlan.find_by_user_id(@user.id)
+    # Tell the AprMailer to send the mail to user and Admins of the site
+    AprMailer.apr_submit_mail(@user).deliver_now
     @action_plan_t.update_attribute(:status, 'Complete')
     respond_to do |format|
       # format.html { redirect_to action_plans_s_submit_to_apr_url, notice: 'Submitted to APR successfully. You cannot edit the forms now.' }

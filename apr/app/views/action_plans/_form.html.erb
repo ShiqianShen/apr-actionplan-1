@@ -28,20 +28,20 @@
 
       <div class="form-group">
         <label class="col-xs-2"><%= f.label :submitter_first_name %></label>
-
-        <div class="col-xs-10"><%= f.text_field :submitter_first_name, :value => User.find_by_username(session[:cas_user].to_s).first_name, disabled: true %></div>
+        <!--<div class="col-xs-10"><%= f.text_field :submitter_first_name, :value => User.find_by_username(session[:cas_user].to_s).first_name, disabled: true %></div>-->
+        <div class="col-xs-10"><%= f.text_field :submitter_first_name %></div>
       </div>
 
       <div class="form-group">
         <label class="col-xs-2"><%= f.label :submitter_last_name %></label>
 
-        <div class="col-xs-10"><%= f.text_field :submitter_last_name, :value => User.find_by_username(session[:cas_user].to_s).last_name, disabled: true %></div>
+        <div class="col-xs-10"><%= f.text_field :submitter_last_name %></div>
       </div>
 
       <div class="form-group">
         <label class="col-xs-2"><%= f.label :submitter_title %></label>
 
-        <div class="col-xs-10"><%= f.text_field :submitter_title %></div>
+        <div class="col-xs-10"><%= f.select(:submitter_title, ActionPlan::TITLE_TYPES) %></div>
       </div>
 
       <% if User.find_by_username(session[:cas_user].to_s).role.eql?("Admin") then %>
@@ -52,7 +52,7 @@
       <% else %>
           <%= f.hidden_field :status, :value => "Incomplete" %>
       <% end %>
-      </table>
+
       <% if !User.find_by_username(session[:cas_user].to_s).role.eql?("Admin") then %>
           <%= f.hidden_field :user_id, :value => User.find_by_username(session[:cas_user].to_s).id %>
       <% end %>

@@ -1,16 +1,7 @@
 <div id="sc" class="container">
   <div class="row">
-    <div class="col-lg-3 col-md-9">
+    <div class="col-lg-2 col-md-2">
       <h1></h1>
-
-      <!--<div class="navbar-collapse collapse slidebar-nav">
-        <ul class="nav">
-          <li><a class="active" href="#">Instructions</a></li>
-          <li><a href="#">Title Page</a></li>
-          <li><a href="#">Criterion 1</a></li>
-          <li><a href="#">Criterion 2</a></li>
-        </ul>
-      </div>-->
 
       <div class="navbar-collapse collapse slidebar-nav">
         <% if !User.find_by_username(session[:cas_user].to_s).blank? %>
@@ -182,10 +173,11 @@
       </div>
     </div>
 
-    <div class="col-lg-9 col-md-9">
+    <div class="col-lg-10 col-md-10">
       <div id="content">
         <%= yield %>
       </div>
+
     </div>
   </div>
 </div>

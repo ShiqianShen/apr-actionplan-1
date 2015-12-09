@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <h1>Listing Units</h1>
 <div>
@@ -9,7 +8,7 @@
       <th>Unit</th>
       <th>College</th>
       <th>Action</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -18,7 +17,6 @@
       <tr>
         <td><%= unit.unit %></td>
         <td><%= unit.college %></td>
-        <td><%= link_to 'Show', unit, class: "btn" %></td>
         <td><%= link_to 'Edit', edit_unit_path(unit), class: "btn", style: 'color: purple;' %></td>
         <td><%= link_to 'Delete', unit, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn", style: 'color: red;' %></td>
       </tr>

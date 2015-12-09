@@ -11,14 +11,18 @@ class ActionPlan < ActiveRecord::Base
   validate :date_of_sv_cannot_be_in_the_past
 
   def date_of_sv_cannot_be_in_the_past
-    errors.add(:date_of_site_visit, "can't be in the past") if
-        !date_of_site_visit.blank? and date_of_site_visit < Date.today
+    errors.add(:date_of_site_visit, "can't be in the future") if !date_of_site_visit.blank? and date_of_site_visit > Date.today
   end
 
   STATUS_TYPES = ['Complete', 'Incomplete']
   validates :status,
-            :inclusion  => { :in => ['Complete', 'Incomplete'],
-                             :message    => "%{value} is not a valid status" }
+            :inclusion => {:in => ['Complete', 'Incomplete'],
+                           :message => "%{value} is not a valid status"}
+
+  TITLE_TYPES = ['Mr', 'Ms', 'Mz.', 'Miss', 'Mrs']
+  validates :submitter_title,
+            :inclusion => {:in => ['Mr', 'Ms', 'Mz.', 'Miss', 'Mrs'],
+                           :message => "%{value} is not a valid title"}
 
   # def del_referenced_data
   #   criterion_detail = CriterionDetail.find_by_action_plan_id(id)

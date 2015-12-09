@@ -11,15 +11,17 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :unit %><br>
-    <%= f.text_field :unit %>
+  <div class="form-group">
+    <label class="col-xs-2"><%= f.label :unit %><br></label>
+    <div class="col-xs-10"><%= f.text_field :unit,:class => "form-control" %></div>
   </div>
-  <div class="field">
-    <%= f.label :college %><br>
-    <%= f.text_field :college %>
+  <div class="form-group">
+    <label class="col-xs-2"><%= f.label :college %><br></label>
+    <div class="col-xs-10"><%= f.text_field :college,:class => "form-control" %></div>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary" %>
+
+    <%= link_to 'Back', units_path, class: "btn btn-primary" %>
   </div>
 <% end %>

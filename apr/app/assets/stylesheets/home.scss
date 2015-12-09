@@ -43,7 +43,8 @@
 }
 .no-padding
 {
-  padding:0px;
+  padding:0px !important;
+  margin:0px !important;
 }
 .bottom-padding {
   padding-bottom: 10px;
@@ -76,4 +77,19 @@ a.active {
 .form-horizontal .control-label{
   /* text-align:right; */
   text-align:left;
+}
+
+a:hover {
+  color: red;
+}
+
+.notice { height: 2.75em; padding: 0.5em; text-align: center; width: 1140px;
+  margin: 0 auto; background: #f50049; color: #000000; }
+
+table {
+  width: 100%;
+  border: 1px solid #e2e2e2;
+}
+th.show-text-area {
+  width: 15%; white-space:pre-wrap;
 }

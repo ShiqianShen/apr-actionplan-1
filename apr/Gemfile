@@ -4,10 +4,10 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # Use sqlite3 as the database for Active Record
-# gem 'sqlite3'
+ gem 'sqlite3'
 
 # Use mysql as the database for Active Record
-gem 'mysql2', '~> 0.3.17'
+# gem 'mysql2', '~> 0.3.17'
 
 # CAS Authentication
 gem "rubycas-client-rails", git: "git://github.com/rubycas/rubycas-client-rails.git"

@@ -1,11 +1,10 @@
 <% if User.find_by_username(session[:cas_user].to_s).role.eql?("Admin") then %>
 
-    <p id="notice"><%= notice %></p>
-
-<!--<p class="link-position-right"><%= link_to("Create New APR Report", new_action_plan_path) %></p>-->
+<!--<p class="link-position-right">< %= link_to("Create New APR Report", new_action_plan_path) %></p>-->
 
 <h1>Listing Action Plans</h1>
 
+    <% if @action_plans.present? then %>
 <table class="table table-striped">
   <thead>
   <tr>
@@ -41,6 +40,10 @@
   <% end %>
   </tbody>
 </table>
+    <% else %>
+        <p>No records found.</p>
+    <% end %>
+
 <% else %>
     <br>
     <p>You do not have permissions to view this page.<p>

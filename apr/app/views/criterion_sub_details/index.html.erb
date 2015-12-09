@@ -1,5 +1,4 @@
-<h1>Listing Criterion Sub Details</h1>
-
+<h1>Action Items:</h1>
 
 <% user = User.find_by_username(session[:cas_user].to_s) %>
 
@@ -8,15 +7,15 @@
       <thead>
       <tr>
         <!--<th>Criterion detail</th>-->
-        <th>Action Item</th>
-        <th>Associated Tasks</th>
-        <th>Individual(s) Responsible</th>
-        <th>Other Resources/Items</th>
+        <th class="show-text-area">Action Item</th>
+        <th class="show-text-area">Associated Tasks</th>
+        <th class="show-text-area">Individual(s) Responsible</th>
+        <th class="show-text-area">Other Resources/Items</th>
         <th>$ Cost Amount (if applicable)</th>
-        <th>Source of Funding</th>
+        <th class="show-text-area">Source of Funding</th>
         <th>Projected Start Date</th>
         <th>Target Date for Completion</th>
-        <th>Current status as of <%= Time.now.strftime("%m/%d/%Y") %></th>
+        <th class="show-text-area">Current status as of <%= Time.now.strftime("%m/%d/%Y") %></th>
         <% if !user.role.eql?("Admin") %>
             <% if !ActionPlan.find_by_user_id(user.id).status.eql?("Complete") then %>
                 <th>Action</th>
@@ -42,8 +41,15 @@
             <!--<td><%# link_to 'Show', criterion_sub_detail %></td>-->
             <% if !user.role.eql?("Admin") %>
                 <% if !ActionPlan.find_by_user_id(user.id).status.eql?("Complete") then %>
-                    <td><%= link_to 'Edit', edit_criterion_sub_detail_path(criterion_sub_detail), class: "btn", style: 'color: purple;' %></td>
-                    <td><%= link_to 'Delete', criterion_sub_detail, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn", style: 'color: red;' %></td>
+                    <!-- Buttons for Edit and Delete; Hover-over functionality is enabled -->
+                    <td><%= link_to edit_criterion_sub_detail_path(criterion_sub_detail), {class: "btn btn-primary btn-sm"} do %>
+                          <span class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="Edit"></span> <% end %>
+                    </td>
+                    <td><%= link_to criterion_sub_detail, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-sm" do %>
+                          <span class="glyphicon glyphicon-remove-sign" data-toggle="tooltip" title="Delete"></span> <% end %>
+                    </td>
+                    <!--<td><%= link_to 'Edit', edit_criterion_sub_detail_path(criterion_sub_detail), class: "btn", style: 'color: purple;' %></td>-->
+                    <!--<td><%= link_to 'Delete', criterion_sub_detail, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn", style: 'color: red;' %></td>-->
                 <% end %>
             <% end %>
           </tr>
@@ -54,6 +60,13 @@
 <% else %>
     No records.
 <% end %>
+
+<script>
+  // enables the tooltip
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+</script>
 
 <br>
 

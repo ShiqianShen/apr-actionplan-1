@@ -1,23 +1,24 @@
 <%= form_for(@criterion) do |f| %>
-  <% if @criterion.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@criterion.errors.count, "error") %> prohibited this criterion from being saved:</h2>
 
-      <ul>
-      <% @criterion.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @criterion.errors.any? %>
+        <div id="error_explanation">
+          <!--<h2><%= pluralize(@criterion.errors.count, "error") %> prohibited this action_plan from being-->
+          <!--saved:</h2>-->
+          <div class="alert alert-danger">
+            <% @criterion.errors.full_messages.each do |message| %>
+                <%= message %><br>
+            <% end %>
+          </div>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :criterion_number %><br>
+      <%= f.number_field :criterion_number %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :criterion_number %><br>
-    <%= f.number_field :criterion_number %>
-  </div>
     <div class="field">
       <%= f.label :description %><br>
-      <%= f.text_field :description %>
+      <%= f.text_field :description, :required => true %>
     </div>
     <div class="field">
       <%= f.label :field1, "Field 1 Text" %><br>
